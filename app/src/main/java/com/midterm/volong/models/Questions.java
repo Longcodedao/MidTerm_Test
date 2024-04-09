@@ -1,17 +1,21 @@
 package com.midterm.volong.models;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 @Entity(tableName = "questions")
-
 public class Questions implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @ColumnInfo
     private String question;
+
+    @ColumnInfo
     private Boolean answers;
 
     public Questions (String question, Boolean answers){

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -42,8 +43,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         QuestionDatabase questionDatabase = QuestionDatabase.getDatabase(this);
+        questionsRepository = new QuestionsRepository(questionDatabase.questionsDao());
 
         questionViewModel = QuestionViewModel.getInstance(this);
+
+
         if (savedInstanceState != null) {
             currentQuestionIndex = savedInstanceState.getInt("currentQuestionIndex", 0);
         }
@@ -131,6 +135,14 @@ public class MainActivity extends AppCompatActivity {
                 List<Questions> questionAnswers = questionViewModel.saveAll();
 
                 for (Questions questions: questionAnswers){
+                    questionsRepository.saveQuestion(questions)
+                            .subscribe(() -> {
+                                // Question saved successfully
+                                Toast.makeText(MainActivity.this, "Question saved", Toast.LENGTH_SHORT).show();
+                            }, throwable -> {
+                                Log.e("MainActivity", "Error saving question: " + throwable.getMessage());
+                                Toast.makeText(MainActivity.this, "Error saving question", Toast.LENGTH_SHORT).show();
+                            });
 
                 }
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
