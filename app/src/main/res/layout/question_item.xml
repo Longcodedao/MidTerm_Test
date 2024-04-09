@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question 1">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvAnswers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ABC">
+
+    </TextView>
+</LinearLayout>
